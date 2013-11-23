@@ -5,12 +5,12 @@ from pygame.locals import *
 import datetime
 from os import path
 
+from plugins import plugins
+
 # -- CONFIGS --
 
 IMGS_PATH = 'images'
 UNKN_IMAGE = 'unknown.png'
-TV_IMAGE = 'tv.png'
-GAMES_IMAGE = 'games.png'
 
 # -------------
 
@@ -44,14 +44,19 @@ class RewardsHandler:
         self.screen = screen
         # Images
         self.unknown_img = pygame.image.load(path.join(IMGS_PATH, UNKN_IMAGE))
-        self.tv_img = pygame.image.load(path.join(IMGS_PATH, TV_IMAGE))
-        self.games_img = pygame.image.load(path.join(IMGS_PATH, GAMES_IMAGE))
+        # Actuators
+        self.actuators = [ac() for ac in plugins]
+        self.act_imgs = [pygame.image.load(path.join(IMGS_PATH, ac.img_name))
+                            for ac in self.actuators]
 
     def startReward(self, user, rtype, timespan):
         self.pending.append(
                 (user, rtype, datetime.timedelta(seconds=timespan), datetime.datetime.now())
             )
         # SIMULATED: execute real REWARD-START action
+        if rtype >= 0 and rtype < len(self.actuators):
+            # Execute action
+            self.actuators[rtype].start()
         # Play notification sound
         pygame.mixer.music.play()
 
@@ -67,6 +72,9 @@ class RewardsHandler:
             if timeremain.total_seconds() < 0:
                 finished.append(i)
                 # SIMULATED: execute real REWARD-STOP action
+                if rtype >= 0 and rtype < len(self.actuators):
+                    # Execute action
+                    self.actuators[rtype].stop()
             else:
                 counter = str(timeremain).split('.')[0] # Get rid of miliseconds
                 tcolor = (10, 10, 10)
@@ -74,11 +82,14 @@ class RewardsHandler:
                     tcolor = (255, 0, 0) # Color text red
                 usertext = font.render(usr, 1, tcolor)
                 counttext = font.render(counter, 1, tcolor)
+                # Get an image
                 img = self.unknown_img
-                if rtype == RewardType.TV:
-                    img = self.tv_img
-                if rtype == RewardType.GAMES:
-                    img = self.games_img
+                # Look for an installed plugin
+                if rtype >= 0 and rtype < len(self.actuators):
+                    # Set the custom image
+                    img = self.act_imgs[rtype]
+
+                # Do the drawings
                 screen.blit(usertext, (left + 25, top + 0))
                 screen.blit(img, (left + 0, top + 32))
                 screen.blit(counttext, (left + 25, top + 162))
