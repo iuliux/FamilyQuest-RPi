@@ -15,7 +15,7 @@ GAMES_IMAGE = 'games.png'
 # -------------
 
 
-pygame.mixer.pre_init(44100, 16, 2, 4096) #frequency, size, channels, buffersize
+pygame.mixer.pre_init(11025, 8, 1, 4096) #frequency, size, channels, buffersize
 pygame.init()
 
 screen = pygame.display.set_mode((640, 480))
@@ -30,12 +30,12 @@ screen.blit(text, textpos)
 pygame.display.flip()
 
 
-# # Sound init
-# print 'Load sound'
-# pygame.mixer.music.load("alrighty.wav")
-# # Play happy sound
-# print 'Play sound'
-# pygame.mixer.music.play()
+# Sound init
+print 'Load sound'
+pygame.mixer.music.load("alrighty.wav")
+# Play happy sound
+print 'Play sound'
+pygame.mixer.music.play()
 
 
 class RewardType:
