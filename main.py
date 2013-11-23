@@ -15,8 +15,11 @@ GAMES_IMAGE = 'games.png'
 # -------------
 
 
-pygame.mixer.pre_init(11025, 8, 1, 4096) #frequency, size, channels, buffersize
+pygame.mixer.pre_init(44100, 16, 1, 4096) #frequency, size, channels, buffersize
 pygame.init()
+
+# Sound init
+pygame.mixer.music.load("notif.wav")
 
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('FamilyQuest Actuator')
@@ -28,14 +31,6 @@ textpos = text.get_rect()
 textpos.centerx = screen.get_rect().centerx
 screen.blit(text, textpos)
 pygame.display.flip()
-
-
-# Sound init
-print 'Load sound'
-pygame.mixer.music.load("alrighty.wav")
-# Play happy sound
-print 'Play sound'
-pygame.mixer.music.play()
 
 
 class RewardType:
@@ -57,6 +52,9 @@ class RewardsHandler:
                 (user, rtype, datetime.timedelta(seconds=timespan), datetime.datetime.now())
             )
         # SIMULATED: execute real REWARD-START action
+        # Play notification sound
+        pygame.mixer.music.play()
+
 
     def display(self):
         finished = []
