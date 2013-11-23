@@ -5,5 +5,5 @@ RaspberryPi component of FamilyQuest app developed under Google Hackathon (Devel
 
 The app has 2 other components:
 
-- Android app: 
+- Android app: https://github.com/bogdan-ivanov/FamilyQuest-Android
 - Cloud server: https://github.com/bogdan-ivanov/familyrpg
