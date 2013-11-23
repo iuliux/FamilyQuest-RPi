@@ -12,7 +12,7 @@ import rest
 from config import *
 
 
-pygame.mixer.pre_init(44100, 16, 1, 4096) # freq, size, channels, buffsize
+pygame.mixer.pre_init(44100, -16, 1, 4096) # freq, size, channels, buffsize
 pygame.init()
 
 # Sound init
