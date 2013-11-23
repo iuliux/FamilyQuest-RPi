@@ -1,4 +1,9 @@
-RPG-Home-RPi
-============
+FamilyQuest RPi
+===============
 
-RaspberryPi component of RPG@Home (Google Hackathon 2013)
+RaspberryPi component of FamilyQuest app developed under Google Hackathon (Develop to Connect) Bucharest 2013.
+
+The app has 2 other components:
+
+- Android app: 
+- Cloud server: https://github.com/bogdan-ivanov/familyrpg
