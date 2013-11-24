@@ -28,7 +28,7 @@ def poll():
         rewards = filter(lambda r: not r[u'consumed'],
                          [json_result(r) for r in member[u'rewards']])
         for r in rewards:
-            # json_result(r[u'resource_uri'] + 'consume/')
+            json_result(r[u'resource_uri'] + 'consume/')
             pass
         # List of triplets (first name, username, list of rewards to consume)
         members.append((member[u'first_name'], member[u'username'], rewards))
