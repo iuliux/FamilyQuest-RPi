@@ -21,6 +21,7 @@ pygame.mixer.music.load("notif.wav")
 screen = pygame.display.set_mode((800, 480))
 pygame.display.set_caption('FamilyQuest Actuator')
 
+bg_img = pygame.image.load(path.join(IMGS_PATH, 'logo_bg.png'))
 screen.fill(THECOLORS['white'])
 font = pygame.font.Font(None, 36)
 text = font.render("Initializing...", 1, (10, 10, 10))
@@ -133,6 +134,7 @@ while shouldRun:
 
     # Display in window
     screen.fill(THECOLORS['white'])
+    screen.blit(bg_img, (0, 0))
     rewHandler.display()
 
     pygame.display.flip()
