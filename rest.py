@@ -7,11 +7,11 @@ http = httplib2.Http()
 # print json.loads(http.request("http://172.28.101.30:8080/api/v1/family/1/?format=json", 'GET')[1])
 
 def json_result(url, method='GET'):
-    response = http.request('http://%s%s?format=json' % (SERVER, url), method)[1]
+    response = http.request('http://%s%s?format=json&username=bogdan&api_key=1234123443214321' % (SERVER, url), method)[1]
     # print 'URL', url
     # print 'RESP', json.loads(response)
     if response:
-        return json.loads(http.request('http://%s%s?format=json' % (SERVER, url), method)[1])
+        return json.loads(response)
     else:
         return {}
 
